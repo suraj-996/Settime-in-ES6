@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+
+    <div id="heading"><b>Set Timeout in ES6</b></div>
+    <h3>[Note: Click on EXAMPLE-1, EXAMPLE-2 to see explanation of both example ]</h3>
+    <div class="container-1">
+      <div class="topic-button" id="ex1">EXAMPLE-1</div>
+      <div class="topic-button" id="ex2">EXAMPLE-2</div>
+    </div>
+
+    <div class="container-2">
+      <div id="desc1" style="visibility: hidden">
+        <img src="1.png" />
+        <div class="explanation">
+          Here, in each iteration, value of i gets printed and the function
+          inside setTimeout function is being transferred to web api container
+          and from the web api container that anonymous function is shifted to
+          callback queue. For each iteration this process goes on, till the
+          value of i becomes 20. As for-loop execution gets over and call stack
+          becomes empty, now functions waiting inside the callback queue is
+          taken out one by one, put into call stack and executed, here every
+          function will be printing 20 because final value of i was 20.
+        </div>
+      </div>
+      <div id="desc2" style="visibility: hidden">
+        <img src="2.png" />
+        <div class="explanation">
+          This case is slightly different from the previous one. As we know,
+          ‘let’ is a block-scoped declaration and it will create a new variable
+          binding for every iteration of the for loop. So in each iteration, a
+          new variable with the updated value is being created in the memory.
+          So, later on when functions are being executed after taking out of the
+          callback queue, they will be printing that value of i, to which it is
+          binded. So, here each function will be printing different value of i.
+        </div>
+      </div>
+    </div>
+    <script>
+      function Changer(event) {
+        var ele1 = document.getElementById("desc1");
+        var ele2 = document.getElementById("desc2");
+
+        ele1.style.visibility = "hidden";
+        ele2.style.visibility = "hidden";
+
+        var button = event.target;
+        if (button.id == "ex1") {
+          ele1.style.visibility = "visible";
+        }
+        if (button.id == "ex2") {
+          ele2.style.visibility = "visible";
+        }
+      }
+
+      var topics = document.querySelectorAll(".topic-button");
+      for (var i = 0; i < topics.length; i++) {
+        topics[i].addEventListener("click", Changer);
+      }
+    </script>
+  </body>
+</html>
